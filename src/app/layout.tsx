@@ -5,6 +5,8 @@ import "./globals.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import SessionProvider from '@/components/SessionProvider';
+import Header from '@/components/Header';
 
 const notoSansJP = Noto_Sans_JP({
   weight: ["300", "400", "500"],
@@ -31,42 +33,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${notoSansJP.variable} ${poppins.variable} antialiased font-sans`}>
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-          <nav className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-20">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#E6B800] to-[#FFD700] rounded-xl flex items-center justify-center">
-                  <FontAwesomeIcon icon={faMusic} className="text-white text-lg" />
-                </div>
-                <span className="text-xl font-semibold text-[#2D3748]">MusicCraft Studio</span>
-              </Link>
-              <div className="hidden md:flex items-center space-x-8">
-                <Link href="/create" className="text-[#4A5568] hover:text-[#E6B800] transition-colors">
-                  音楽を作成
-                </Link>
-                <Link href="/examples" className="text-[#4A5568] hover:text-[#E6B800] transition-colors">
-                  制作実例
-                </Link>
-                <Link href="/about" className="text-[#4A5568] hover:text-[#E6B800] transition-colors">
-                  サービスについて
-                </Link>
-                <Link href="/contact" className="text-[#4A5568] hover:text-[#E6B800] transition-colors">
-                  お問い合わせ
-                </Link>
-                <Link
-                  href="/login"
-                  className="px-6 py-2 bg-gradient-to-r from-[#E6B800] to-[#FFD700] text-white rounded-full font-medium hover:shadow-lg transition-all"
-                >
-                  ログイン
-                </Link>
-              </div>
-              <button className="md:hidden p-2">
-                <svg className="w-6 h-6 text-[#4A5568]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </nav>
-        </header>
-        {children}
+        <SessionProvider>
+          <Header />
+          {children}
         <footer className="bg-[#FEFCF7] border-t border-gray-100">
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
             <div className="grid md:grid-cols-4 gap-8">
@@ -107,6 +76,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </SessionProvider>
       </body>
     </html>
   );

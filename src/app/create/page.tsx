@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import AuthGuard from '@/components/AuthGuard';
 
 type Genre = 'pop' | 'classical' | 'rock' | 'jazz' | 'electronic' | 'ambient';
 type Emotion = 'happy' | 'emotional' | 'energetic' | 'calm' | 'romantic' | 'nostalgic';
@@ -42,8 +43,9 @@ export default function CreatePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FEFCF7] to-white py-12 px-4 md:px-8">
-      <div className="max-w-4xl mx-auto">
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-[#FEFCF7] to-white py-12 px-4 md:px-8">
+        <div className="max-w-4xl mx-auto">
         {/* パンくずリスト */}
         <nav className="mb-8">
           <ol className="flex items-center space-x-2 text-sm text-[#4A5568]">
@@ -177,7 +179,8 @@ export default function CreatePage() {
             </p>
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 }

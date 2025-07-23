@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic, faGift, faHeart, faKey, faMugHot, faImage, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { useSession } from 'next-auth/react';
+import AuthModal from '@/components/AuthModal';
 
 type Genre = 'pop' | 'classical' | 'rock' | 'jazz' | 'electronic' | 'ambient';
 type Emotion = 'happy' | 'emotional' | 'energetic' | 'calm' | 'romantic' | 'nostalgic';
@@ -63,11 +65,13 @@ const ParticleEffect = () => {
 };
 
 export default function Home() {
+  const { data: session } = useSession();
   const [selectedGenre, setSelectedGenre] = useState<Genre>('pop');
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion>('happy');
   const [selectedProduct, setSelectedProduct] = useState<ProductCategory>('keychain');
   const [lyrics, setLyrics] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const genres: { value: Genre; label: string; icon: string }[] = [
     { value: 'pop', label: 'ポップ', icon: '🎤' },
@@ -95,6 +99,11 @@ export default function Home() {
   ];
 
   const handleQuickGenerate = () => {
+    if (!session) {
+      setShowAuthModal(true);
+      return;
+    }
+    
     setIsGenerating(true);
     setTimeout(() => {
       setIsGenerating(false);
@@ -467,6 +476,14 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* 認証モーダル */}
+      <AuthModal 
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        title="ログインして音楽を生成"
+        message="音楽生成機能をご利用いただくには、無料のアカウント登録またはログインが必要です。今すぐ登録して、あなただけの特別な音楽を作成しましょう！"
+      />
     </div>
   );
 }
