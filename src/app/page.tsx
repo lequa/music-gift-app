@@ -15,6 +15,7 @@ interface Particle {
   size: number;
   duration: number;
   delay: number;
+  initialBottom: number;
 }
 
 const ParticleEffect = () => {
@@ -30,6 +31,7 @@ const ParticleEffect = () => {
           size: Math.random() * 3 + 2, // 2-5px の小さな粒
           duration: Math.random() * 6 + 4, // 4-10秒で上昇
           delay: Math.random() * 10, // 0-10秒の遅延でバラつき
+          initialBottom: Math.random() * -120, // 各粒子の初期位置をランダムに設定
         });
       }
       setParticles(newParticles);
@@ -46,7 +48,7 @@ const ParticleEffect = () => {
           className="absolute rounded-full"
           style={{
             left: `${particle.left}%`,
-            bottom: '0px', // セクションの底から開始
+            bottom: `${particle.initialBottom}vh`, // 各粒子の固定された初期位置
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             background: 'rgba(230, 184, 0, 0.6)',
