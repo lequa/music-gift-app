@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -48,9 +49,11 @@ export default function Header() {
                 className="flex items-center space-x-2 px-4 py-2 rounded-full hover:bg-[#F7FAFC] transition-colors"
               >
                 {session.user?.image ? (
-                  <img
+                  <Image
                     src={session.user.image}
                     alt={session.user.name || 'ユーザー'}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full"
                   />
                 ) : (

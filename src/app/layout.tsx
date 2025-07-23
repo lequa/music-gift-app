@@ -3,8 +3,6 @@ import { Noto_Sans_JP } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import SessionProvider from '@/components/SessionProvider';
 import Header from '@/components/Header';
 

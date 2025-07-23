@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
       }
     });
 
-  } catch (error: any) {
-    if (error.message === 'User already exists') {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'User already exists') {
       return NextResponse.json(
         { error: '既に登録されているメールアドレスです' },
         { status: 409 }

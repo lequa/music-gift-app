@@ -68,7 +68,7 @@ export default function SignUpPage() {
       } else {
         router.push('/');
       }
-    } catch (error) {
+    } catch {
       setError('サーバーエラーが発生しました。再度お試しください。');
     } finally {
       setIsLoading(false);
@@ -79,7 +79,7 @@ export default function SignUpPage() {
     setIsLoading(true);
     try {
       await signIn('google', { callbackUrl: '/' });
-    } catch (error) {
+    } catch {
       setError('Googleアカウントでの登録に失敗しました');
       setIsLoading(false);
     }

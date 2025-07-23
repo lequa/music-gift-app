@@ -33,7 +33,7 @@ export default function SignInPage() {
       } else {
         router.push('/');
       }
-    } catch (error) {
+    } catch {
       setError('ログインに失敗しました。再度お試しください。');
     } finally {
       setIsLoading(false);
@@ -44,7 +44,7 @@ export default function SignInPage() {
     setIsLoading(true);
     try {
       await signIn('google', { callbackUrl: '/' });
-    } catch (error) {
+    } catch {
       setError('Googleログインに失敗しました');
       setIsLoading(false);
     }

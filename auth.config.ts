@@ -43,7 +43,7 @@ export default {
               id: user.id,
               email: user.email,
               name: user.name,
-              image: user.image,
+              image: user.image || undefined,
             };
           }
         }
@@ -62,7 +62,7 @@ export default {
             id: user.id || `google_${Date.now()}`,
             email: user.email!,
             name: user.name || 'Unknown User',
-            image: user.image,
+            image: user.image || undefined,
             provider: 'google',
             createdAt: new Date(),
           });
@@ -88,7 +88,6 @@ export default {
   },
   pages: {
     signIn: '/auth/signin',
-    signUp: '/auth/signup',
   },
 } satisfies NextAuthConfig;
 
