@@ -6,6 +6,7 @@ import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTshirt, faMugHot, faImage } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 
 // 3Dモデルコンポーネント（仮のボックスで表現）
 function TShirtModel() {
@@ -42,7 +43,7 @@ type Product = {
   basePrice: number;
   sizes?: string[];
   colors?: { name: string; hex: string }[];
-  model: JSX.Element;
+  model: React.ReactElement;
 };
 
 export default function GoodsPage() {
